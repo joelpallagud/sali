@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "My New Project",
-    "description": "A very interesting project.",
-    "slug": "my-new-project",
+    "name": "Sali",
+    "description": "CPR App.",
+    "slug": "sali",
     "privacy": "public",
-    "sdkVersion": "27.0.0",
+    "sdkVersion": "28.0.0",
     "platforms": ["ios", "android"],
     "version": "1.0.0",
     "orientation": "portrait",

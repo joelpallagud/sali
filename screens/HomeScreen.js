@@ -107,7 +107,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     color: 'rgba(0,0,0,0.4)',
     fontSize: 14,
-    lineHeight: 19,
     textAlign: 'center',
   },
   contentContainer: {
@@ -143,7 +142,6 @@ const styles = StyleSheet.create({
   getStartedText: {
     fontSize: 17,
     color: 'rgba(96,100,109, 1)',
-    lineHeight: 24,
     textAlign: 'center',
   },
   tabBarInfoContainer: {

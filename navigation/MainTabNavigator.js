@@ -1,61 +1,75 @@
 import React from 'react';
 import { Platform } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { Icon } from 'expo';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
+import ProfileScreen from '../screens/static/ProfileScreen';
+import EmergencyScreen from '../screens/EmergencyScreen';
+import PracticeScreen from '../screens/static/PracticeScreen';
+
 import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
 
-const HomeStack = createStackNavigator({
-  Home: HomeScreen,
+import deviceHeight from '../utils/dimensions';
+import Colors from '../constants/Colors';
+
+const EmergencyStack = createStackNavigator({
+  Emergency: EmergencyScreen,
+}, {
+  headerMode: 'none',
 });
 
-HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
+EmergencyStack.navigationOptions = {
+  tabBarLabel: 'Emergency',
+  tabBarIcon: () => (
+    <Icon.Ionicons
+        name={'md-add-circle'}
+        size={26}
+        style={{ marginBottom: -3 }}
+        color={Colors.red}
+      />
+  ),
+};
+
+
+const ProfileStack = createStackNavigator({
+  Profile: ProfileScreen,
+}, {
+  headerMode: 'none'
+});
+
+ProfileStack.navigationOptions = {
+  tabBarLabel: 'Profile',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
+      name={Platform.OS === 'ios' ? 'ios-contact-outline' : 'ios-contact-outline'}
     />
   ),
 };
 
-const LinksStack = createStackNavigator({
-  Links: LinksScreen,
+const PracticeStack = createStackNavigator({
+  Practice: PracticeScreen,
+}, {
+  headerMode: 'none'
 });
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+PracticeStack.navigationOptions = {
+  tabBarLabel: 'Practice',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? `ios-link${focused ? '' : '-outline'}` : 'md-link'}
-    />
-  ),
-};
-
-const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen,
-});
-
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? `ios-options${focused ? '' : '-outline'}` : 'md-options'}
+      name={Platform.OS === 'ios' ?'ios-pulse' : 'ios-pulse'}
     />
   ),
 };
 
 export default createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
-  SettingsStack,
+  Profile: ProfileStack,
+  Emergency: EmergencyStack,
+  Practice: PracticeStack  
+},{
+  initialRouteName: 'Emergency',
+  tabBarOptions: {
+    activeTintColor: Colors.tintColor
+  }
 });
