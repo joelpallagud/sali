@@ -11,7 +11,9 @@ import {
     LOGIN_USER,
     LOGOUT,
     LOGOUT_SUCCESS,
-    LOGOUT_FAIL
+    LOGOUT_FAIL,
+    FB_LOGIN_SUCCESS,
+    FB_LOGIN_FAIL
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -44,19 +46,23 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, ...INITIAL_STATE, user: action.payload };
         case LOGIN_USER_FAIL:
             return { ...state, error: action.payload, password: '', loading: false };
-	case SIGNUP: 
-	    return { ...state, loading: true, error: '' };
-	case SIGNUP_FAIL: 
-	    return { ...state, error: action.payload, password: '', loading: false };
-	case SIGNUP_SUCCESS:
-	    return INITIAL_STATE;
-	case LOGOUT: 
-	    return {...state, loading: true}
-	case LOGOUT_SUCCESS: 
-	    return {...state,  ...INITIAL_STATE, loading: false}
-	case LOGOUT_FAIL:
-	    return {...state,error: action.payload, loading: false}
+        case FB_LOGIN_SUCCESS:
+            return { ...state, user: action.payload };
+        case FB_LOGIN_FAIL:
+            return { ...state, user: null };
+	    case SIGNUP: 
+	        return { ...state, loading: true, error: '' };
+	    case SIGNUP_FAIL: 
+	        return { ...state, error: action.payload, password: '', loading: false };
+	    case SIGNUP_SUCCESS:
+	        return INITIAL_STATE;
+	    case LOGOUT: 
+	        return {...state, loading: true}
+	    case LOGOUT_SUCCESS: 
+	        return {...state,  ...INITIAL_STATE, loading: false}
+	    case LOGOUT_FAIL:
+	        return {...state,error: action.payload, loading: false}
         default:
             return state;
-    }
+        }
 };

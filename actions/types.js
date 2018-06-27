@@ -14,6 +14,7 @@ export const PASSWORD_CHANGED = 'password_changed';
 export const LOGIN_USER_SUCCESS = 'login_user_success';
 export const LOGIN_USER_FAIL = 'login_user_fail';
 export const LOGIN_USER = 'login_user';
+export const FB_LOGIN_FAIL = 'fb_login_fail';
 export const USER_CREATE = 'user_create';
 export const USER_CREATE_SUCCESS = 'user_create_success';
 export const USER_CREATE_FAILURE = 'user_create_fail';

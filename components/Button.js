@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { Button } from 'react-native-elements';
 
-import { deviceHeight, deviceWidth } from '../utils/dimensions.js';
+import { deviceHeight, deviceWidth } from '../api/dimensions.js';
 import Fonts from '../constants/Fonts.js';
 
 const ButtonComponent = ({ title, onPress, style, fontStyle }) => {

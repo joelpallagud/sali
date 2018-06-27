@@ -6,7 +6,7 @@ import Button from '../components/Button';
 import Background from '../components/Background';
 import HeaderText from '../components/HeaderText';
 import Logo from '../components/Logo';
-import { deviceHeight, deviceWidth } from '../utils/dimensions';
+import { deviceHeight, deviceWidth } from '../api/dimensions';
 
 class LanguageScreen extends Component {
     englishHandleClick = () => {

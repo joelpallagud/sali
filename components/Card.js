@@ -3,7 +3,7 @@ import { View, Text, Image } from 'react-native';
 import { moderateScale } from 'react-native-size-matters';
 
 import { LOGO } from '../assets/images';
-import { deviceHeight, deviceWidth } from '../utils/dimensions';
+import { deviceHeight, deviceWidth } from '../api/dimensions';
 
 const Card = ({ title, src }) => {
     const {

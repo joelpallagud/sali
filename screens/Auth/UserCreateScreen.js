@@ -12,9 +12,9 @@ import TPAModal from '../../components/TPAModal';
 import TPAText from '../../components/TPAText';
 import Logo from '../../components/Logo';
 
-import { deviceWidth, deviceHeight } from '../../utils/dimensions';
+import { deviceWidth, deviceHeight } from '../../api/dimensions';
 import { userCreate } from '../../actions';
-import validate from '../../validate';
+import validate from '../../api/validate';
 import { ICON_LOCATION, ICON_NUMBER, ICON_NAME, ICON_GIFT } from '../../assets/images';
 import Fonts from '../../constants/Fonts';
 
@@ -32,15 +32,8 @@ class UserCreateScreen extends Component {
     }
 
     onModalButtonPress = async () => {
-		await this.toggleModal();
 		if (!this.props.error) {
-			const resetAction = NavigationActions.reset({
-				index: 0,
-				actions: [
-					this.props.navigation.navigate('PostRegistration')
-				]
-			});
-			this.props.navigation.dispatch(resetAction);
+			this.props.navigation.navigate('PostRegistration')
 		}
 	}
 

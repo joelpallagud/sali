@@ -7,10 +7,10 @@ import ButtonLarge from '../../components/ButtonLarge';
 import Background from '../../components/Background';
 import HeaderText from '../../components/HeaderText';
 import { LOGO } from '../../assets/images';
-import { deviceHeight } from '../../utils/dimensions';
+import { deviceHeight } from '../../api/dimensions';
 
-import { signInWithFacebook } from '../../actions';
-import * as c from '../../constants';
+import { fbLogin } from '../../actions';
+import * as c from '../../api/constants';
 
 
 class LoginScreen extends Component {
@@ -53,8 +53,12 @@ class LoginScreen extends Component {
         this.props.navigation.navigate('Signin');
     }
 
-    fbClick = () => {
+    fbClick = async () => {
+        await this.props.fbLogin();
         this.props.navigation.navigate('PostRegistration');
+        // if (this.props.auth.user) {
+        //     this.props.navigation.navigate('PostRegistration');
+        // } 
     }
 
     render() {
@@ -110,9 +114,9 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-    const { text } = state;
+    const { text, auth } = state;
 
-    return { text };
+    return { text, auth };
 };
 
-export default connect(mapStateToProps, { signInWithFacebook })(LoginScreen);
+export default connect(mapStateToProps, { fbLogin })(LoginScreen);

@@ -25,7 +25,7 @@ class CompressScreen extends Component {
                 video={COMPRESS_VID}
                 audio={COMPRESS_AUDIO}
                 title="Compress the Chest"
-                isCPR
+                hasBeat
             />
         );
     }

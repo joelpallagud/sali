@@ -1,3 +1,6 @@
+import { AsyncStorage } from 'react-native';
+import { Facebook } from 'expo';
+
 import {
     REGISTER_USER,
     CHOOSE_LANGUAGE,
@@ -11,12 +14,13 @@ import {
     LOGIN_USER,
     LOGOUT,
     LOGOUT_SUCCESS,
-    LOGOUT_FAIL
+    LOGOUT_FAIL,
+    FB_LOGIN_FAIL
 } from './types';
 import { NavigationActions } from 'react-navigation';
-import firebase from '../firebase';
-// import api from '../api';
+import firebase from '../api/firebase';
 import { setDefaultDetails } from './ProfileActions';
+import { FACEBOOK_APP_ID, FACEBOOK_PERMISSIONS } from '../api/constants';
 
 export const registerUser = ({ prop, value }) => ({
         type: REGISTER_USER,
@@ -29,15 +33,15 @@ export const chooseLanguage = (language) => ({
     });
 
 export const loginUser = (email, password) => (dispatch) => {
-        if (email && password) {
-            dispatch({ type: LOGIN_USER });
-            firebase.auth().signInWithEmailAndPassword(email, password)
-                .then(user => loginUserSuccess(dispatch, user))
-                .catch((err) => loginUserFail(dispatch, err));
-        } else {
-            loginUserFail(dispatch, { message: 'You must fill up all the inputs' });
-        }
-    };
+    if (email && password) {
+        dispatch({ type: LOGIN_USER });
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .then(user => loginUserSuccess(dispatch, user))
+            .catch((err) => loginUserFail(dispatch, err));
+    } else {
+        loginUserFail(dispatch, { message: 'You must fill up all the inputs' });
+    }
+};
 
 const loginUserFail = (dispatch, error) => {
     console.log('Login failed');
@@ -52,8 +56,44 @@ const loginUserSuccess = (dispatch, user) => {
         type: LOGIN_USER_SUCCESS,
         payload: user,
     });
-    // dispatch(NavigationActions.navigate('UserCreate'));
+    // dispatch( .navigate('UserCreate'));
 };
+
+
+export const fbLogin = () => async (dispatch) => {
+    const token = await AsyncStorage.getItem('auth_token');
+
+    if (token) {
+        console.log('FB login success');
+        fbFirebaseLogin(dispatch, token);
+    } else {
+        doFbLogin(dispatch);
+    }
+}
+
+const doFbLogin = async (dispatch) => {
+    const { type, token } = await Facebook.logInWithReadPermissionsAsync(FACEBOOK_APP_ID, { 
+        permissions: FACEBOOK_PERMISSIONS 
+    });
+
+    if (type === 'cancel') {
+        console.log('FB login fail');
+        return dispatch({ type: FB_LOGIN_FAIL });
+    } else {
+        console.log('do FB login success');
+        fbFirebaseLogin(dispatch, token);  
+        await AsyncStorage.setItem('auth_token', token);
+    }
+}
+
+const fbFirebaseLogin = async (dispatch, token) => {
+    const credential = await firebase.auth.FacebookAuthProvider.credential(token);
+
+    // Sign in with credential from the Facebook user.
+    firebase.auth().signInAndRetrieveDataWithCredential(credential)
+        .then(user => loginUserSuccess(dispatch, user))
+        .catch((err) => loginUserFail(dispatch, err));
+}
 
 export const signUp = (email, password) => (dispatch) => {
 	if (email && password) {
@@ -67,46 +107,10 @@ export const signUp = (email, password) => (dispatch) => {
 	}
     };
 
-// export const signUp = (number) => {
-//     const recaptchaVerifier = new firebase.auth.RecaptchaVerifier('sign-in-button', {
-//         'size': 'invisible',
-//         'callback': function(response) {
-//           onSignInSubmit();
-//         }
-//       });
-//     const phoneNumber = number;
-//     return (dispatch) => {
-//         dispatch({ type: SIGNUP});
-// 	    console.log("Signing in");
-// 	    firebase.auth().signInWithPhoneNumber(phoneNumber)
-//             .then(function (confirmationResult) {
-//             // SMS sent. Prompt user to type the code from the message, then sign the
-//             // user in with confirmationResult.confirm(code).
-//             //   window.confirmationResult = confirmationResult;
-//             }).catch(function (error) {
-//             // Error; SMS not sent
-//             // ...
-//         });
-//     }
-// }
-
-// export function signInWithFacebook(facebookToken, successCB, errorCB) {
-//     return (dispatch) => {
-//         api.signInWithFacebook(facebookToken, (success, data, error) => {
-//             if (success) {
-//                 if (data.exists) dispatch({ type: t.LOGGED_IN, data: data.user });
-//                 successCB(data);
-//             } else if (error) errorCB(error);
-//         });
-//     };
-// }
-
 const signupFail = (dispatch, error) => {
     console.log('Signup failed');
     console.log(error);
-    dispatch({ type: SIGNUP_FAIL, 
-	payload: error 
-    });
+    dispatch({ type: SIGNUP_FAIL, payload: error });
 };
 
 const signupSuccess = (dispatch, email, password) => {

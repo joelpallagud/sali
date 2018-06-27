@@ -33,7 +33,7 @@ class InfantCompressScreen extends Component {
                 video={INFANT_COMPRESS_VID}
                 audio={INFANT_COMPRESS_AUDIO}
                 title="Compress the Chest"
-                isCPR
+                hasBeat
             />
         );
     }

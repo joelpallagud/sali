@@ -1,4 +1,4 @@
-import firebase from '../firebase';
+import firebase from '../api/firebase';
 import {
     USER_CREATE,
     USER_CREATE_SUCCESS,

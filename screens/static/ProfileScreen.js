@@ -6,10 +6,10 @@ import Button from '../../components/Button';
 import Logo from '../../components/Logo';
 import UserInfo from '../../components/UserInfo';
 
-import firebase from '../../firebase';
+import firebase from '../../api/firebase';
 import { logout, userFetch } from '../../actions';
 import { ICON_PROFILE } from '../../assets/images';
-import { deviceHeight } from '../../utils/dimensions';
+import { deviceHeight } from '../../api/dimensions';
 
 
 class ProfileScreen extends Component {
@@ -26,7 +26,7 @@ class ProfileScreen extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-		user: null,
+			user: null,
 		};
 	}
 

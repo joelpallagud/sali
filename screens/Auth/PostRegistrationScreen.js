@@ -6,7 +6,7 @@ import Button from '../../components/Button';
 import Background from '../../components/Background';
 import HeaderText from '../../components/HeaderText';
 import { LOGO } from '../../assets/images';
-import { deviceWidth, deviceHeight } from '../../utils/dimensions';
+import { deviceWidth, deviceHeight } from '../../api/dimensions';
 
 
 class PostRegistrationScreen extends Component {

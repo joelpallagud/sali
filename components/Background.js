@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image } from 'react-native';
-import { deviceHeight, deviceWidth } from '../utils/dimensions';
+import { deviceHeight, deviceWidth } from '../api/dimensions';
 
 const Background = ({ source }) => {
     const { backgroundStyle } = styles;

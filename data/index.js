@@ -7,9 +7,9 @@ export const CHECKPULSE_VID = require('../data/videos/check.mp4');
 export const CHECKBREATH_VID = require('../data/videos/check.mp4');
 export const BREATH_VID = require('../data/videos/breath.mp4');  
 
-export const INFANT_CHECK_VID = require('../data/videos/check.mp4');
-export const INFANT_CHECKPULSE_VID = require('../data/videos/check.mp4');
-export const INFANT_CHECKBREATH_VID = require('../data/videos/check.mp4');
+export const INFANT_CHECK_VID = require('../data/videos/125.mp4');
+export const INFANT_CHECKPULSE_VID = require('../data/videos/135.mp4');
+export const INFANT_CHECKBREATH_VID = require('../data/videos/145.mp4');
 export const INFANT_COMPRESS_VID = require('../data/videos/compress.mp4'); 
 export const INFANT_BREATH_VID = require('../data/videos/breath.mp4');  
 

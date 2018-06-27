@@ -5,28 +5,28 @@ import { NavigationActions } from 'react-navigation';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import Background from '../../components/Background';
-import { deviceWidth, deviceHeight } from '../../utils/dimensions';
+import { deviceWidth, deviceHeight } from '../../api/dimensions';
 import { LOGO, ICON_EMAIL, ICON_PASSWORD } from '../../assets/images';
 import { loginUser } from '../../actions';
-import validate from '../../validate';
-import validation from '../../validation';
+import validate from '../../api/validate';
+import validation from '../../api/validation';
 import Fonts from '../../constants/Fonts';
 import HeaderText from '../../components/HeaderText';
 
 class SigninScreen extends Component {
     backClick = () => {
-	this.props.navigation.navigate('Home');
+		this.props.navigation.navigate('Home');
     }
 
     state = {
-	email: null,
-	password: null, 
-	error: '',
+		email: null,
+		password: null, 
+		error: '',
     }
 
     submit= () => {
-	this.props.loginUser(this.state.email, this.state.password);
-	console.log(this.props.error);
+		this.props.loginUser(this.state.email, this.state.password);
+		console.log(this.props.error);
     }
 
 

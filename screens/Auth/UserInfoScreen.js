@@ -6,8 +6,8 @@ import Button from '../../components/Button';
 import Background from '../../components/Background';
 import { LOGO, ICON_NAME, ICON_GIFT, ICON_NUMBER, ICON_LOCATION } from '../../assets/images';
 import { userCreate } from '../../actions';
-import firebase from '../../firebase';
-import { deviceWidth } from '../../utils/dimensions';
+import firebase from '../../api/firebase';
+import { deviceWidth } from '../../api/dimensions';
 
 class UserInfoScreen extends Component {
     backClick = () => {

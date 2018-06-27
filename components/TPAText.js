@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { deviceWidth } from '../utils/dimensions.js';
+import { deviceWidth } from '../api/dimensions.js';
 import Fonts from '../constants/Fonts.js';
 
 const TPAText = ({ text }) => {

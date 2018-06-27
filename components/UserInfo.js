@@ -3,7 +3,7 @@ import { View, Image } from 'react-native';
 import HeaderText from './HeaderText.js';
 import ContactText from './ContactText.js';
 import Logo from './Logo.js';
-import { deviceHeight, deviceWidth } from '../utils/dimensions.js';
+import { deviceHeight, deviceWidth } from '../api/dimensions.js';
 import { ICON_PROFILE } from '../assets/images/index.js';
 import Fonts from '../constants/Fonts.js';
 

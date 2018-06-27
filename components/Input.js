@@ -1,7 +1,7 @@
 import React from 'react';
 import { TextInput, View, Image, Text } from 'react-native';
 import { moderateScale } from 'react-native-size-matters';
-import { deviceWidth, deviceHeight } from '../utils/dimensions';
+import { deviceWidth, deviceHeight } from '../api/dimensions';
 import Fonts from '../constants/Fonts';
 
 

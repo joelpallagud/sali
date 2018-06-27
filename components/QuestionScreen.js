@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View } from 'react-native'; 
 import Background from './Background';
 import Controller from './Controller';
-import { deviceWidth, deviceHeight } from '../utils/dimensions';
+import { deviceWidth, deviceHeight } from '../api/dimensions';
 
 class QuestionScreen extends Component {
     render() {

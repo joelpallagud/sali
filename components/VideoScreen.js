@@ -31,22 +31,22 @@ class VideoScreen extends Component {
     // }
 
     componentWillUnmount() {
-        const { isCPR } = this.props;
+        const { hasBeat } = this.props;
         
         clearInterval(this.interval);
         this.audio.unloadAsync();
-        (isCPR) ? this.beat.unloadAsync() : null
+        (hasBeat) ? this.beat.unloadAsync() : null
     } 
 
     playAudio = async () => {
         const { audio } = this.props;
-        const { isCPR } = this.props;
+        const { hasBeat } = this.props;
 
         this.audio = new Audio.Sound();
         this.beat = new Audio.Sound();
         await this.audio.loadAsync(audio, { isLooping: true });
         await this.beat.loadAsync(CPR_BEAT, { isLooping: true });
-        if (isCPR) {
+        if (hasBeat) {
             this.audio.playAsync();
             this.beat.playAsync();
         } else {

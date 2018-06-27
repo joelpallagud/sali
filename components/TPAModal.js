@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import Button from './Button.js';
-import { deviceHeight, deviceWidth } from '../utils/dimensions.js';
+import { deviceHeight, deviceWidth } from '../api/dimensions.js';
 import Fonts from '../constants/Fonts.js';
 
 const TPAModal = ({ onPress }) => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Button } from 'react-native-elements';
-import { deviceWidth, deviceHeight } from '../utils/dimensions.js';
+import { deviceWidth, deviceHeight } from '../api/dimensions.js';
 import Fonts from '../constants/Fonts.js';
 
 const ButtonSmall = ({ title, onPress, style, fontStyle }) => {

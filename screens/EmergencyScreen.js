@@ -6,7 +6,7 @@ import { Location, Permissions, Constants } from 'expo';
 import g from 'ngeohash';
 import axios from 'axios';
 
-import firebase from '../firebase';
+import firebase from '../api/firebase';
 
 import Button from '../components/Button';
 import Card from '../components/Card';
@@ -14,7 +14,7 @@ import HeaderText from '../components/HeaderText';
 import Logo from '../components/Logo';
 import { CARD_CPR, ICON_EMERGENCY } from '../assets/images';
 import { setLocation } from '../actions';
-import { SEND_TEXT_ENDPOINT } from '../constants';
+import { SEND_TEXT_ENDPOINT } from '../api/constants';
 
 // import Background from '../components/Background';
 // import Tutorial from '../components/Tutorial';

@@ -9,7 +9,7 @@ import PracticeScreen from '../screens/static/PracticeScreen';
 
 import TabBarIcon from '../components/TabBarIcon';
 
-import deviceHeight from '../utils/dimensions';
+import deviceHeight from '../api/dimensions';
 import Colors from '../constants/Colors';
 
 const EmergencyStack = createStackNavigator({
