@@ -4,9 +4,7 @@ import NumberList from './NumberList';
 import Background from './Background';
 import Controller from './Controller';
 // import Overlay from './Overlay';
-// import { loadAudio } from '../helpers/audio';
-// import Geocoder from 'react-native-geocoder';
-// import { getCity } from '../helpers/geocoder';
+
 
 
 class NumberListScreen extends Component {

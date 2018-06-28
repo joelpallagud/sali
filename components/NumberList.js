@@ -24,21 +24,32 @@ class NumberList extends Component {
     }
 
     getLocationAsync = async () => {
-        const { status } = await Permissions.askAsync(Permissions.LOCATION);
-        if (status !== 'granted') {
-            this.setState({
-                errorMessage: 'Permission to access location was denied',
-            });
-        } else {
-            const pos = await Location.getCurrentPositionAsync({});
-            const coords = { 
-                latitude: pos.coords.latitude,
-                longitude: pos.coords.longitude
-            };
-            const location = await Location.reverseGeocodeAsync(coords);
-            this.setState({ location });
-            this.props.showHotlines(this.state.location[0].city);
-            console.log(this.props.hotlines);
+        try {
+            const { status } = await Permissions.getAsync(Permissions.LOCATION);
+            const { locationServicesEnabled } = await Location.getProviderStatusAsync();
+          
+            if (status === 'denied') {
+                await this.setState({ 
+                    errorMessage: 'Permission to access location was denied' 
+                });
+                Permissions.askAsync(Permissions.LOCATION);
+            } else if (locationServicesEnabled) {
+                const pos = await Location.getCurrentPositionAsync({});
+                const coords = { 
+                    latitude: pos.coords.latitude,
+                    longitude: pos.coords.longitude
+                };
+                const location = await Location.reverseGeocodeAsync(coords);
+                this.setState({ location });
+                this.props.showHotlines(this.state.location[0].city);
+            }
+            else {
+                const place = [{ city: 'Metro Manila' }];
+                this.setState({ location: place });
+                this.props.showHotlines('Metro Manila');
+            };  
+        } catch (err) {
+            this.setState({ location: false });
         }
     };
 

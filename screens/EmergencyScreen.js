@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import { Image, View, Platform } from 'react-native';
 import { connect } from 'react-redux';
-import { NavigationActions } from 'react-navigation';
 import { Location, Permissions, Constants } from 'expo';
 import g from 'ngeohash';
 import axios from 'axios';
-
-import firebase from '../api/firebase';
 
 import Button from '../components/Button';
 import Card from '../components/Card';
@@ -54,11 +51,10 @@ class EmergencyScreen extends Component {
             const { locationServicesEnabled } = await Location.getProviderStatusAsync();
             
             if (status === 'denied') {
-                this.setState({
+                await this.setState({
                     errorMessage: 'Permission to access location was denied',
-                }, () =>
-                    Permissions.askAsync(Permissions.LOCATION)
-                );
+                });
+                Permissions.askAsync(Permissions.LOCATION);
             } else if (locationServicesEnabled) {
                 const pos = await Location.getCurrentPositionAsync({});
                 const lat = pos.coords.latitude;
@@ -80,7 +76,13 @@ class EmergencyScreen extends Component {
                 this.setState({ location: coords, address: place });
                 this.props.setLocation(this.state.location);
             } else {
-                console.log('Turn on location')
+                Alert.alert(
+                    'Turn on your location',
+                    [
+                      { text: 'OK', onPress: () => this.getLocationAsync() },
+                    ],
+                    { cancelable: false }
+                )
             }
         } catch (err) {
             console.log(err);
@@ -103,7 +105,7 @@ class EmergencyScreen extends Component {
             }
             .catch((error) => {
                 console.log(error);
-              })
+            })
         });
     }
     
