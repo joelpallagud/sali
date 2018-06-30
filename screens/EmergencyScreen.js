@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, View, Platform } from 'react-native';
+import { Image, View, Platform, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import { Location, Permissions, Constants } from 'expo';
 import g from 'ngeohash';
@@ -90,15 +90,24 @@ class EmergencyScreen extends Component {
     };
 
     sendTexts = () => {
-        const { city, name, region, street } = this.state.address[0];
-        const lat = this.state.location.latitude;
-        const lng = this.state.location.longitude;
-        const place = `${name} ${street} St. ${city}, ${region}`;
+        // const { city, name, region, street } = this.state.address[0];
+        // const lat = this.state.location.latitude;
+        // const lng = this.state.location.longitude;
+        // const place = `${name} ${street} St. ${city}, ${region}`;
+        // const data = {
+        //     place,
+        //     lat, 
+        //     lng
+        // };
+        const name = 'The Medical City';
+        const lat = 14.589417;
+        const lng = 121.069401;
         const data = {
-            place,
-            lat, 
+            name,
+            lat,
             lng
         };
+
         axios.post(SEND_TEXT_ENDPOINT, data, {
             headers: {
                 'Content-Type': 'application/json',

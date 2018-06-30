@@ -11,9 +11,9 @@ class QuestionScreen extends Component {
 
         return (
             <View style={containerStyle}>
-                <Background
+                {/* <Background
                     source={require('../assets/images/asset3.png')}
-                />
+                /> */}
                 <View style={controllerStyle}>
                     <Controller 
                         backOnPress={backClick}  

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import VideoScreen from '../../components/VideoScreen';
 import { COMPRESS_VID, COMPRESS_AUDIO } from '../../data';

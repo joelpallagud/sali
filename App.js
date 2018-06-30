@@ -33,6 +33,7 @@ export default class App extends React.Component {
 
   render() {
     const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
+    console.ignoredYellowBox = ['Setting a timer'];
 
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
       return (
@@ -98,6 +99,7 @@ export default class App extends React.Component {
         'comfortaa' : require('./assets/fonts/Comfortaa-Bold.ttf'),
         'quicksand' : require('./assets/fonts/Quicksand-Regular.otf'),
         'robotoslab' : require('./assets/fonts/RobotoSlab-Regular.ttf'),
+        'somatic' : require('./assets/fonts/Somatic-Rounded.otf'),
       }),
     ]);
   };

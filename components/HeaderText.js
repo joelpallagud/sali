@@ -23,7 +23,7 @@ const styles = {
         fontSize: Fonts.xlarge,
         color: '#5F968E',
         textAlign: 'center',
-        fontFamily: 'comfortaa',
+        fontFamily: 'somatic',
     },
 };
 

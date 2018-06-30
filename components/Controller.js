@@ -66,7 +66,7 @@ const styles = {
         backgroundColor: '#5F968E'
     },
     buttonContainerStyle: {
-        flex: 3,
+        flex: 5,
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'flex-start'

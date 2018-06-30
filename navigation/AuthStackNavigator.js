@@ -16,7 +16,6 @@ const AuthStackNavigator = createStackNavigator({
     UserCreate: UserCreateScreen, 
 },{
     headerMode: 'none',
-}
-);
+});
 
 export default AuthStackNavigator;

@@ -41,11 +41,11 @@ const styles = {
         borderWidth: 3,
         borderColor: '#252525',
         borderRadius: 20,
-        shadowColor: '#252525',
-        shadowOpacity: 0.5,
-        shadowRadius: 20,
-        shadowOffset: { width: -1, height: 4 },
-        elevation: 1
+        // shadowColor: '#252525',
+        // shadowOpacity: 0.5,
+        // shadowRadius: 20,
+        // shadowOffset: { width: -1, height: 4 },
+        // elevation: 1
     },
     backgroundImageStyle: {
         height: '100%',

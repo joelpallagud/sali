@@ -41,20 +41,18 @@ const userCreateFailure = (dispatch, error) => {
     });
 };
 
-export const userFetch = () => {
-    const uid = firebase.auth().currentUser.uid;
+export const userFetch = (user) => {
+    const uid = user.uid;
     const path = `/users/${uid}`;
 
     return (dispatch) => {
 		dispatch({ type: USER_FETCH });
 		firebase.database().ref(path)
-			.on('value', snapshot => {
-				dispatch({ type: USER_FETCH_SUCCESS, 
+			.once('value', snapshot => {
+				dispatch({ 
+					type: USER_FETCH_SUCCESS, 
 					payload: snapshot.val() });
 				})
-			.catch((err) => {
-				dispatch({ type: USER_FETCH_FAILURE, payload: err });
-			});
     };
 };
 

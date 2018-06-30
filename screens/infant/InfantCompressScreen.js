@@ -34,6 +34,7 @@ class InfantCompressScreen extends Component {
                 audio={INFANT_COMPRESS_AUDIO}
                 title="Compress the Chest"
                 hasBeat
+                noOptions
             />
         );
     }

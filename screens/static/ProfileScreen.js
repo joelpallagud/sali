@@ -22,27 +22,31 @@ class ProfileScreen extends Component {
 			/>
 		),
 	}
-	
-	constructor(props) {
-		super(props);
-		this.state = {
-			user: null,
-		};
-	}
 
 	state = {
 		user: null,
 	}
 
 	componentDidMount() {
-		firebase.auth().onAuthStateChanged((user) => {
-			if (user != null) {
-				this.setState({ user });
-				this.props.userFetch();
-			} else {
-				console.log(user);
-			}
-		});
+		const { user } = this.props;
+		if (user) {
+			this.props.userFetch(user)
+		}
+		// console.log('this.state.user');
+		// console.log(this.state.user);
+		// console.log('this.props.user');
+		// console.log(this.props.user);
+		// console.log('this.props.profile');
+		// console.log(this.props.profile);
+		
+		// firebase.auth().onAuthStateChanged((user) => {
+		// 	if (user != null) {
+		// 		this.setState({ user });
+		// 		this.props.userFetch();
+		// 	} else {
+		// 		console.log(user);
+		// 	}
+		// });
 	}
 
 	redirectLogin = () => {
@@ -53,22 +57,23 @@ class ProfileScreen extends Component {
 		this.props.navigation.navigate('UserInfo');
 	}
 
-    renderInfo = () => {		
-		if (this.state.user && this.props.details) {
+    renderInfo = () => {
+		const { user, details }	= this.props;
+		if (user && details) {
 			return (
 				<UserInfo 
-					name={this.props.details.name}
-					city={this.props.details.address}
-					email={this.state.user.email}
-					number={this.props.details.phone}
+					name={details.name}
+					city={details.address}
+					email={user.email}
+					number={details.phone}
 				/>
 			);
-		} else if (!this.props.details && this.state.user) {
+		} else if (!details && user) {
 			return (
 				<UserInfo 
 					name="Not set"
 					city="Not set"
-					email={this.state.user.email}
+					email={user.email}
 					number="Not set"
 				/>
 			);
@@ -77,7 +82,7 @@ class ProfileScreen extends Component {
 
     render() {
 		const { containerStyle, headerContainerStyle } = styles;
-		const { user } = this.state;
+		const { user, logout } = this.props;
         return (
             <View style={containerStyle}>
 				{/* <Background
@@ -89,7 +94,7 @@ class ProfileScreen extends Component {
 					{ user &&
 						<Button 
 							title="Logout"
-							onPress={this.props.logout}
+							onPress={logout}
 						/>
 					}
 					{ user &&

@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { Audio } from 'expo';
 import Background from './Background';
 import Controller from './Controller';
+import Controller2 from './Controller2';
 import Overlay from './Overlay';
 import Video from './Video';
 import { CPR_BEAT } from '../data';
@@ -19,6 +20,7 @@ class VideoScreen extends Component {
     
     componentDidMount() {
         this.playAudio();
+        (this.props.hasBeat) ? this.playBeat() : null
         // this._getSubtitles();
 
     }
@@ -31,28 +33,47 @@ class VideoScreen extends Component {
     // }
 
     componentWillUnmount() {
-        const { hasBeat } = this.props;
+        // const { hasBeat } = this.props;
         
         clearInterval(this.interval);
         this.audio.unloadAsync();
-        (hasBeat) ? this.beat.unloadAsync() : null
+        (this.props.hasBeat) ? this.beat.unloadAsync() : null
+        // this.beat.unloadAsync();
     } 
 
     playAudio = async () => {
         const { audio } = this.props;
-        const { hasBeat } = this.props;
 
         this.audio = new Audio.Sound();
-        this.beat = new Audio.Sound();
         await this.audio.loadAsync(audio, { isLooping: true });
-        await this.beat.loadAsync(CPR_BEAT, { isLooping: true });
-        if (hasBeat) {
-            this.audio.playAsync();
-            this.beat.playAsync();
-        } else {
-            this.audio.playAsync();
-        }
+        this.audio.playAsync();
     }
+
+    playBeat = async () => {
+        this.beat = new Audio.Sound();
+        await this.beat.loadAsync(CPR_BEAT, { isLooping: true });
+        this.beat.playAsync();
+    }
+
+    renderController = (backClick, nextClick, text) => {
+		if (this.props.noOptions) {
+			return (
+				<Controller2 
+                    nextOnPress={nextClick} 
+                    question={text}
+                />
+			);
+		} else {
+			return (
+				<Controller 
+                    backOnPress={backClick}  
+                    nextOnPress={nextClick} 
+                    question={text}
+                />
+			);
+		}
+}
+
 
 
     render() {
@@ -76,9 +97,9 @@ class VideoScreen extends Component {
 
         return (
             <View style={containerStyle}>
-                <Background
+                {/* <Background
                     source={require('../assets/images/asset3.png')}
-                />
+                /> */}
                 <View style={overlayStyle} pointerEvents='none'>
                     {/* { this.state.isLoaded && */}
                         <Overlay 
@@ -99,11 +120,7 @@ class VideoScreen extends Component {
                 </View>
                     
                 <View style={controllerStyle}>
-                    <Controller 
-                        backOnPress={backClick}  
-                        nextOnPress={nextClick} 
-                        question={text}
-                    />
+                    { this.renderController(backClick, nextClick, text) }
                 </View>
             </View>
             );
@@ -116,7 +133,7 @@ class VideoScreen extends Component {
             // marginTop: (Platform.OS === 'android') ? 25 : 0
         },
         controllerStyle: {
-            flex: 30
+            flex: 20
         },
         overlayStyle: {
             position: 'absolute',
@@ -130,7 +147,7 @@ class VideoScreen extends Component {
             height: '15%',
         },
         videoStyle: {
-            flex: 70, 
+            flex: 80, 
             justifyContent: 'flex-end',
         }
     };

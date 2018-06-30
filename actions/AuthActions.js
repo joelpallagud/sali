@@ -36,7 +36,7 @@ export const loginUser = (email, password) => (dispatch) => {
     if (email && password) {
         dispatch({ type: LOGIN_USER });
         firebase.auth().signInWithEmailAndPassword(email, password)
-            .then(user => loginUserSuccess(dispatch, user))
+            .then(() => loginUserSuccess(dispatch))
             .catch((err) => loginUserFail(dispatch, err));
     } else {
         loginUserFail(dispatch, { message: 'You must fill up all the inputs' });
@@ -46,17 +46,19 @@ export const loginUser = (email, password) => (dispatch) => {
 const loginUserFail = (dispatch, error) => {
     console.log('Login failed');
     console.log(error);
-    dispatch({ type: LOGIN_USER_FAIL,
-	payload: error
+    dispatch({ 
+        type: LOGIN_USER_FAIL,
+        payload: error
     });
 };
 
-const loginUserSuccess = (dispatch, user) => {
+const loginUserSuccess = async (dispatch) => {
+    const currentUser = await firebase.auth().currentUser;
+
     dispatch({
         type: LOGIN_USER_SUCCESS,
-        payload: user,
+        payload: currentUser,
     });
-    // dispatch( .navigate('UserCreate'));
 };
 
 
@@ -105,7 +107,7 @@ export const signUp = (email, password) => (dispatch) => {
 	} else {
         signupFail(dispatch, { message: 'You must fill up all the inputs' });
 	}
-    };
+};
 
 const signupFail = (dispatch, error) => {
     console.log('Signup failed');
@@ -125,7 +127,7 @@ export const logout = () => (dispatch) => {
     firebase.auth().signOut()
         .then(() => logoutSuccess(dispatch))
         .catch((err) => logoutFail(dispatch, err));
-    };
+};
 
 const logoutSuccess = (dispatch) => {
     dispatch({ type: LOGOUT_SUCCESS });

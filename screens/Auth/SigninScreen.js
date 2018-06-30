@@ -89,7 +89,7 @@ const styles = {
 		textAlign: 'center',
 		color: '#5F968E',
 		fontSize: Fonts.large,
-		fontFamily: 'comfortaa',
+		fontFamily: 'somatic',
 		marginBottom: 20
     },
     logo: {

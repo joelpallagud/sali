@@ -46,7 +46,7 @@ const styles = {
     }, 
     textStyle: {
         fontSize: Fonts.medium, 
-        fontFamily: 'comfortaa'
+        fontFamily: 'somatic'
     }
 };
 

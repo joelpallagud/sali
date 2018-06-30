@@ -28,6 +28,6 @@ export const INFANT_CHECKBREATH_AUDIO = require('../data/audio/check.m4a');
 export const INFANT_COMPRESS_AUDIO = require('../data/audio/compress.m4a');
 export const INFANT_BREATH_AUDIO = require('../data/audio/compress.m4a');
 
-export const CPR_BEAT = require('../data/audio/beat1.wav');
+export const CPR_BEAT = require('../data/audio/beat1.m4a');
 
 //Subtitles
