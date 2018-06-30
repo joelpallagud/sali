@@ -90,21 +90,13 @@ class EmergencyScreen extends Component {
     };
 
     sendTexts = () => {
-        // const { city, name, region, street } = this.state.address[0];
-        // const lat = this.state.location.latitude;
-        // const lng = this.state.location.longitude;
-        // const place = `${name} ${street} St. ${city}, ${region}`;
-        // const data = {
-        //     place,
-        //     lat, 
-        //     lng
-        // };
-        const name = 'The Medical City';
-        const lat = 14.589417;
-        const lng = 121.069401;
+        const { city, name, region, street } = this.state.address[0];
+        const lat = this.state.location.latitude;
+        const lng = this.state.location.longitude;
+        const place = `${name} ${street} St. ${city}, ${region}`;
         const data = {
-            name,
-            lat,
+            place,
+            lat, 
             lng
         };
 
