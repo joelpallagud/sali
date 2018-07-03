@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
-import { Image, View, Platform, Alert } from 'react-native';
+import { Image, View, Alert, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import { Location, Permissions, Constants } from 'expo';
 import g from 'ngeohash';
-import axios from 'axios';
 
 import Button from '../components/Button';
 import Card from '../components/Card';
 import HeaderText from '../components/HeaderText';
 import Logo from '../components/Logo';
 import { CARD_CPR, ICON_EMERGENCY } from '../assets/images';
-import { setLocation } from '../actions';
+import { setLocation, getLocation } from '../actions';
 import { SEND_TEXT_ENDPOINT } from '../api/constants';
 
 // import Background from '../components/Background';
@@ -28,20 +27,14 @@ class EmergencyScreen extends Component {
     };
 
     state = {
-        location: null,
         errorMessage: null,
-        address: null
     };
 
     componentDidMount = async () => {
-        if (Platform.OS === 'android' && !Constants.isDevice) {
-          this.setState({
-            errorMessage: 'Oops, error in getting location',
-          });
-        } else {
+        const allowsLocation = await AsyncStorage.getItem('allow location');
+
+        if  (allowsLocation === 'true') {
             await this.getLocationAsync();
-            // this.getNearbyUsers();
-            // this.sendTexts();
         }
       }
 
@@ -56,6 +49,7 @@ class EmergencyScreen extends Component {
                 });
                 Permissions.askAsync(Permissions.LOCATION);
             } else if (locationServicesEnabled) {
+                this.props.getLocation();
                 const pos = await Location.getCurrentPositionAsync({});
                 const lat = pos.coords.latitude;
                 const lng = pos.coords.longitude;
@@ -68,18 +62,14 @@ class EmergencyScreen extends Component {
                     g3: g.encode_int(lat, lng, 28),
                     g1: g.encode_int(lat, lng, 30)
                 };
-                const place = await Location.reverseGeocodeAsync({
-                    latitude: lat,
-                    longitude: lng
-                });
 
-                this.setState({ location: coords, address: place });
-                this.props.setLocation(this.state.location);
+                this.props.setLocation(coords);
             } else {
                 Alert.alert(
                     'Turn on your location',
+                    'Turn it on',
                     [
-                      { text: 'OK', onPress: () => this.getLocationAsync() },
+                      { text: 'OK', onPress: () => this.getLocationAsync()  },
                     ],
                     { cancelable: false }
                 )
@@ -87,29 +77,9 @@ class EmergencyScreen extends Component {
         } catch (err) {
             console.log(err);
         }
+        return;
     };
 
-    sendTexts = () => {
-        const { city, name, region, street } = this.state.address[0];
-        const lat = this.state.location.latitude;
-        const lng = this.state.location.longitude;
-        const place = `${name} ${street} St. ${city}, ${region}`;
-        const data = {
-            place,
-            lat, 
-            lng
-        };
-
-        axios.post(SEND_TEXT_ENDPOINT, data, {
-            headers: {
-                'Content-Type': 'application/json',
-            }
-            .catch((error) => {
-                console.log(error);
-            })
-        });
-    }
-    
     handleClick = () => {
         this.props.navigation.navigate('Infant');
     }
@@ -121,6 +91,7 @@ class EmergencyScreen extends Component {
     render() {
         const { emergencyHeader, practiceButton } = this.props.text;
         // const { viewed, error } = this.props.tutorial;
+        console.log(this.props.profile);
 
         return (
             <View style={styles.containerStyle}>
@@ -148,10 +119,10 @@ const styles = {
     },
 };
 const mapStateToProps = (state) => {
-    const { text } = state;
+    const { text, profile } = state;
     const { tutorial } = state;
     
-    return { text, tutorial };
+    return { text, tutorial, profile };
 };
 
-export default connect(mapStateToProps, { setLocation })(EmergencyScreen);
+export default connect(mapStateToProps, { setLocation, getLocation })(EmergencyScreen);

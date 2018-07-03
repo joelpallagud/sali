@@ -33,7 +33,8 @@ class UserCreateScreen extends Component {
 
     onModalButtonPress = async () => {
 		if (!this.props.error) {
-			this.props.navigation.navigate('PostRegistration')
+			await this.toggleModal();
+			this.props.navigation.navigate('GetLocation')
 		}
 	}
 

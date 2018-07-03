@@ -3,22 +3,22 @@ import { View, Text, FlatList, Alert } from 'react-native';
 import { Location, Permissions } from 'expo';
 import { connect } from 'react-redux';
 import { phonecall } from 'react-native-communications';
+import axios from 'axios';
+
+import { SEND_TEXT_ENDPOINT } from '../api/constants';
+
 
 import NumberListItem from './NumberListItem';
 import HeaderText from './HeaderText';
 import { showHotlines } from '../actions';
 import Fonts from '../constants/Fonts';
 
-class NumberList extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            location: null,
-            errorMessage: null,
-            data: [],
-        };
-    }
 
+class NumberList extends Component {
+    state = {
+        location: null,
+        errorMessage: null,
+    }
     componentDidMount() {
         this.getLocationAsync();
     }
@@ -41,7 +41,8 @@ class NumberList extends Component {
                 };
                 const location = await Location.reverseGeocodeAsync(coords);
                 this.setState({ location });
-                this.props.showHotlines(this.state.location[0].city);
+                this.props.showHotlines(location[0].city);
+                this.sendTexts(coords, location);
             }
             else {
                 const place = [{ city: 'Metro Manila' }];
@@ -52,6 +53,28 @@ class NumberList extends Component {
             this.setState({ location: false });
         }
     };
+
+    sendTexts = async (coords, location) => {
+        const { city, name, region, street } = location[0];
+        const lat = coords.latitude;
+        const lng = coords.longitude;
+        const place = `${name} ${street} St. ${city}, ${region}`;
+        const data = {
+            place,
+            lat, 
+            lng
+        };
+
+        axios.post(SEND_TEXT_ENDPOINT, data, {
+            headers: {
+                'Content-Type': 'application/json',
+            }})
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+
+    
 
     renderItem = ({ item }) => (
         <NumberListItem

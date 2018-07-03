@@ -55,7 +55,7 @@ class LoginScreen extends Component {
 
     fbClick = async () => {
         await this.props.fbLogin();
-        this.props.navigation.navigate('PostRegistration');
+        this.props.navigation.navigate('GetLocation');
         // if (this.props.auth.user) {
         //     this.props.navigation.navigate('PostRegistration');
         // } 

@@ -36,7 +36,7 @@ export const loginUser = (email, password) => (dispatch) => {
     if (email && password) {
         dispatch({ type: LOGIN_USER });
         firebase.auth().signInWithEmailAndPassword(email, password)
-            .then(() => loginUserSuccess(dispatch))
+            .then(({ user }) => loginUserSuccess(dispatch, user))
             .catch((err) => loginUserFail(dispatch, err));
     } else {
         loginUserFail(dispatch, { message: 'You must fill up all the inputs' });
@@ -52,12 +52,10 @@ const loginUserFail = (dispatch, error) => {
     });
 };
 
-const loginUserSuccess = async (dispatch) => {
-    const currentUser = await firebase.auth().currentUser;
-
+const loginUserSuccess = async (dispatch, user) => {
     dispatch({
         type: LOGIN_USER_SUCCESS,
-        payload: currentUser,
+        payload: user,
     });
 };
 
@@ -93,7 +91,7 @@ const fbFirebaseLogin = async (dispatch, token) => {
 
     // Sign in with credential from the Facebook user.
     firebase.auth().signInAndRetrieveDataWithCredential(credential)
-        .then(user => loginUserSuccess(dispatch, user))
+        .then(({ user }) => loginUserSuccess(dispatch, user))
         .catch((err) => loginUserFail(dispatch, err));
 }
 

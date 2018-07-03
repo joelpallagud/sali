@@ -5,7 +5,6 @@ import { showLanguage } from '../../actions';
 import Button from '../../components/Button';
 import Background from '../../components/Background';
 import { LOGO } from '../../assets/images';
-import { deviceWidth } from '../../api/dimensions';
 import Fonts from '../../constants/Fonts';
 
 class GreetingsScreen extends Component {

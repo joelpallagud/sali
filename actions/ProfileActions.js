@@ -1,3 +1,4 @@
+import { AsyncStorage } from 'react-native';
 import firebase from '../api/firebase';
 import {
     USER_CREATE,
@@ -6,11 +7,14 @@ import {
     USER_FETCH,
     USER_FETCH_SUCCESS,
 	USER_FETCH_FAILURE,
+	GET_LOCATION,
 	SET_LOCATION,
 	SET_LOCATION_SUCCESS,
-	SET_LOCATION_FAILURE
+	SET_LOCATION_FAILURE,
+	ALLOW_LOCATION,
+	ALLOW_LOCATION_SUCCESS,
+	ALLOW_LOCATION_FAILURE
 } from './types';
-// import { NavigationActions } from 'react-navigation';
 
 export const userCreate = (name, birthday, phone, address) => (dispatch) => {
     if (name && birthday && phone && address) { 
@@ -60,6 +64,12 @@ export const setDefaultDetails = () => {
     userCreate('', '', '', '');
 };
 
+export const getLocation = () => (dispatch) => {
+	dispatch({
+		type: GET_LOCATION,
+	})
+}
+
 export const setLocation = (location) => (dispatch) => {
     if (location) { 
 		const uid = firebase.auth().currentUser.uid;
@@ -70,7 +80,7 @@ export const setLocation = (location) => (dispatch) => {
 		firebase.database().ref(path)
 			.update(location)
 			.then(() => {
-				dispatch({ type: SET_LOCATION_SUCCESS });
+				setLocationSuccess(dispatch, location);
 			})
 			.catch((err) => {
 				setLocationFailure(dispatch, err);
@@ -78,6 +88,14 @@ export const setLocation = (location) => (dispatch) => {
     } else {
 		setLocationFailure(dispatch, 'Location not found');
     }
+};
+
+const setLocationSuccess = (dispatch, location) => {
+    console.log('Set Location Success');
+    dispatch({
+		type: SET_LOCATION_SUCCESS,
+		payload: location
+    });
 };
 
 const setLocationFailure = (dispatch, error) => {
@@ -89,3 +107,39 @@ const setLocationFailure = (dispatch, error) => {
     });
 };
 
+export const allowsLocation = (allowLocation) => {
+	const uid = firebase.auth().currentUser.uid;
+	const path = `/users/${uid}`;
+	const string = allowLocation.allowLocation.toString();
+	
+	return (dispatch) => {
+		dispatch({ type: ALLOW_LOCATION })
+
+		firebase.database().ref(path)
+			.update(allowLocation)
+			.then(() => {
+				allowsLocationSuccess(dispatch, allowLocation.allowLocation);
+				AsyncStorage.setItem('allow location', string)
+			})
+			.catch((err) => {
+				allowsLocationFailure(dispatch, "Can't find location permissions");
+			});
+	};
+}
+
+const allowsLocationSuccess = (dispatch, allowLocation) => {
+    console.log('Allows Location Success');
+    dispatch({
+		type: ALLOW_LOCATION_SUCCESS,
+		payload: allowLocation
+    });
+};
+
+const allowsLocationFailure = (dispatch, error) => {
+    console.log('Allows Location Failure');
+    console.log(error);
+    dispatch({
+		type: ALLOW_LOCATION_FAILURE,
+		payload: error
+    });
+};

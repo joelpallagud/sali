@@ -1,7 +1,7 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View, SafeAreaView } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
-import { Provider, connect } from 'react-redux';
+import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
 
@@ -100,6 +100,8 @@ export default class App extends React.Component {
         'quicksand' : require('./assets/fonts/Quicksand-Regular.otf'),
         'robotoslab' : require('./assets/fonts/RobotoSlab-Regular.ttf'),
         'somatic' : require('./assets/fonts/Somatic-Rounded.otf'),
+        'source-sans' : require('./assets/fonts/SourceSansPro-Regular.ttf'),
+        'source-sans-bold' : require('./assets/fonts/SourceSansPro-Bold.ttf'),
       }),
     ]);
   };

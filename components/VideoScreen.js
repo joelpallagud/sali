@@ -4,6 +4,7 @@ import { Audio } from 'expo';
 import Background from './Background';
 import Controller from './Controller';
 import Controller2 from './Controller2';
+import Controller3 from './Controller3';
 import Overlay from './Overlay';
 import Video from './Video';
 import { CPR_BEAT } from '../data';
@@ -65,7 +66,7 @@ class VideoScreen extends Component {
 			);
 		} else {
 			return (
-				<Controller 
+				<Controller3 
                     backOnPress={backClick}  
                     nextOnPress={nextClick} 
                     question={text}
@@ -149,6 +150,9 @@ class VideoScreen extends Component {
         videoStyle: {
             flex: 80, 
             justifyContent: 'flex-end',
+            marginTop: 14,
+            marginRight: 14,
+            marginLeft: 14
         }
     };
 

@@ -51,11 +51,8 @@ const styles = {
     questionStyle: {
         textAlign: 'center',
         fontSize: Fonts.xlarge,
-        fontFamily: 'quicksand'
+        fontFamily: 'source-sans'
         
-    },
-    buttonStyle: {
-        width: 100,
     },
     noButtonStyle: {
         borderColor: '#E05858',
@@ -69,12 +66,14 @@ const styles = {
         flex: 5,
         flexDirection: 'row',
         justifyContent: 'space-around',
-        alignItems: 'flex-start'
+        alignItems: 'flex-start',
+        // backgroundColor: 'blue'
     },
     questionContainerStyle: {
         flex: 2,
-        justifyContent: 'center',
+        justifyContent: 'flex-end',
         alignItems: 'center',
+        // backgroundColor: 'blue'
     },
     buttonTextStyle: {
         color: 'white',
