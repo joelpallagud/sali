@@ -8,7 +8,7 @@ import TutorialReducer from './TutorialReducer';
 import SubtitleReducer from './SubtitleReducer';
 import ProfileReducer from './ProfileReducer';
 
-export default combineReducers({
+export default ({
     auth: AuthReducer,
     text: TextReducer,
     tutorial: TutorialReducer,

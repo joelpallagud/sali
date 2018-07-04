@@ -4,9 +4,11 @@ import { AppLoading, Asset, Font, Icon } from 'expo';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
+import { PersistGate } from 'redux-persist/integration/react'
 
 import RootNavigation from './navigation/RootNavigation';
 import reducers from './reducers';
+import configureStore from './store';
 import {
 	ICON_CALL,
 	ICON_EMERGENCY,
@@ -32,7 +34,8 @@ export default class App extends React.Component {
   };
 
   render() {
-    const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
+    const { persistor, store } = configureStore();
+
     console.ignoredYellowBox = ['Setting a timer'];
 
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
@@ -46,12 +49,14 @@ export default class App extends React.Component {
     } else {
       return (
         <Provider store={store}>
-          <SafeAreaView style={{ flex: 1, backgroundColor: '#ddd' }}>
-						<View style={styles.container}>
-        	  {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        	    <RootNavigation />
-        	  </View>
-          </SafeAreaView>
+          <PersistGate persistor={persistor}>
+            <SafeAreaView style={{ flex: 1, backgroundColor: '#ddd' }}>
+					  	<View style={styles.container}>
+        	    {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+        	      <RootNavigation />
+        	    </View>
+            </SafeAreaView>
+          </PersistGate>
         </Provider>
       );
     }

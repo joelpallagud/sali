@@ -1,3 +1,4 @@
+import { PERSIST_REHYDRATE } from 'redux-persist/lib/constants';
 import {
     USER_CREATE,
     USER_CREATE_SUCCESS,
@@ -22,6 +23,8 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+	case PERSIST_REHYDRATE:
+    	return action.payload.profile || [];	
 	case USER_CREATE:
 		return { ...state, loading: true };
 	case USER_CREATE_SUCCESS:

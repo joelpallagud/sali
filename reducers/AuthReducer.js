@@ -1,3 +1,5 @@
+import { PERSIST_REHYDRATE } from 'redux-persist/lib/constants';
+
 import {
     REGISTER_USER,
     CHOOSE_LANGUAGE,
@@ -32,6 +34,8 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
     console.log(action);
     switch (action.type) {
+        case PERSIST_REHYDRATE:
+            return action.payload.auth || [];
         case REGISTER_USER:
             return { ...state, [action.payload.prop]: action.payload.value };
         case CHOOSE_LANGUAGE:

@@ -9,6 +9,17 @@ import Logo from '../components/Logo';
 import { deviceHeight, deviceWidth } from '../api/dimensions';
 
 class LanguageScreen extends Component {
+    componentDidMount() {
+        const { text, auth, navigation } = this.props;
+        console.log ('this.props');
+        console.log (this.props);
+        // console.log ('auth.user');
+        // console.log (auth.user);
+
+        if (text && auth.user) {
+            navigation.navigate('Home')
+        }
+    }
     englishHandleClick = () => {
         this.props.chooseLanguage('English');
         this.props.navigation.navigate('Greetings');
@@ -71,9 +82,13 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-    const { language } = state.auth;
+    const { text, auth } = state;
+    console.log('state');
+    console.log(state);
+    // console.log(state);
+    // console.log(state);
 
-    return { language };
+    return { text, auth };
 };
 
 export default connect(mapStateToProps, { chooseLanguage })(LanguageScreen);
