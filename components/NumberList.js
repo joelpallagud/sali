@@ -42,7 +42,7 @@ class NumberList extends Component {
                 const location = await Location.reverseGeocodeAsync(coords);
                 this.setState({ location });
                 this.props.showHotlines(location[0].city);
-                this.sendTexts(coords, location);
+                // this.sendTexts(coords, location);
             }
             else {
                 const place = [{ city: 'Metro Manila' }];

@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Button } from 'react-native-elements';
+import { moderateScale } from 'react-native-size-matters';
 import { deviceWidth, deviceHeight } from '../api/dimensions.js';
 import Fonts from '../constants/Fonts.js';
 
@@ -25,15 +26,13 @@ const styles = {
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 30,
-        marginTop: deviceWidth * 0.05,
-        width: deviceWidth * 0.43,
-        height: deviceHeight * 0.086
+        flex: 1
     },
     buttonStyle: {
         borderRadius: 30,
         borderWidth: 3,
-        width: deviceWidth * 0.4,
-        height: deviceHeight * 0.08,
+        width: moderateScale(80),
+        height: moderateScale(50),
         borderColor: '#BFDCCF',
         backgroundColor: 'white',
         shadowColor: 'black',

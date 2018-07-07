@@ -20,7 +20,6 @@ class CompressScreen extends Component {
         return (
             <VideoScreen 
                 text={compress}
-                backClick={this.backClick}
                 nextClick={this.nextClick}
                 video={COMPRESS_VID}
                 audio={COMPRESS_AUDIO}

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import NumberList from './NumberList';
 import Background from './Background';
-import Controller from './Controller';
+import Controller3 from './Controller3';
 // import Overlay from './Overlay';
 // import { loadAudio } from '../helpers/audio';
 // import Geocoder from 'react-native-geocoder';
@@ -48,8 +48,7 @@ class NumberListScreen extends Component {
 				<NumberList />
 			</View>
 			<View style={controllerStyle}>
-				<Controller 
-					backOnPress={backClick}  
+				<Controller3 
 					nextOnPress={nextClick} 
 					question={question}
 				/>

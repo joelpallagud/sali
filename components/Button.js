@@ -26,7 +26,6 @@ const styles = {
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 30,
-        marginTop: deviceWidth * 0.05,
         width: deviceWidth * 0.52,
         height: deviceHeight * 0.086
     },

@@ -29,7 +29,6 @@ class InfantBreathingScreen extends Component {
         return (
             <VideoScreen 
                 text={(noPulse) ? breathing : justBreathing}
-                backClick={this.backClick}
                 nextClick={this.nextClick}
                 video={INFANT_BREATH_VID}
                 audio={INFANT_BREATH_AUDIO}

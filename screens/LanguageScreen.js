@@ -11,13 +11,9 @@ import { deviceHeight, deviceWidth } from '../api/dimensions';
 class LanguageScreen extends Component {
     componentDidMount() {
         const { text, auth, navigation } = this.props;
-        console.log ('this.props');
-        console.log (this.props);
-        // console.log ('auth.user');
-        // console.log (auth.user);
-
+    
         if (text && auth.user) {
-            navigation.navigate('Home')
+            navigation.navigate('InfantSurvey')
         }
     }
     englishHandleClick = () => {

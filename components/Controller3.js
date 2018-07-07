@@ -24,12 +24,15 @@ const Controller = ({ nextOnPress, backOnPress, question }) => {
                     </Text>
                 </View>
                 <View style={buttonContainerStyle}>
-                    <ButtonSmall 
-                        title='NO'
-                        onPress={backOnPress}
-                        style={[buttonStyle, noButtonStyle]}
-                        fontStyle={buttonTextStyle}
-                    />
+                    {
+                        backOnPress &&
+                        <ButtonSmall 
+                            title='NO'
+                            onPress={backOnPress}
+                            style={[buttonStyle, noButtonStyle]}
+                            fontStyle={buttonTextStyle}
+                        />
+                    }
                     <ButtonSmall 
                         title='YES'
                         onPress={nextOnPress}
@@ -46,7 +49,6 @@ const styles = {
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: 'rgba(0, 0, 0, 0)',
     },
     questionStyle: {
         textAlign: 'center',
@@ -63,17 +65,14 @@ const styles = {
         backgroundColor: '#5F968E'
     },
     buttonContainerStyle: {
-        flex: 1,
-        flexDirection: 'row',
+        flex: 30,
         justifyContent: 'space-around',
-        alignItems: 'flex-start',
-        // backgroundColor: 'blue'
+        alignItems: 'center',
     },
     questionContainerStyle: {
-        flex: 1,
+        flex: 70,
         justifyContent: 'flex-end',
         alignItems: 'center',
-        // backgroundColor: 'blue'
     },
     buttonTextStyle: {
         color: 'white',

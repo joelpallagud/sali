@@ -1,6 +1,7 @@
 import React, { Component } from 'react'; 
 import { View } from 'react-native'; 
 import { Audio } from 'expo';
+import { moderateScale } from 'react-native-size-matters';
 import Background from './Background';
 import Controller from './Controller';
 import Controller2 from './Controller2';
@@ -56,27 +57,6 @@ class VideoScreen extends Component {
         this.beat.playAsync();
     }
 
-    renderController = (backClick, nextClick, text) => {
-		if (this.props.noOptions) {
-			return (
-				<Controller2 
-                    nextOnPress={nextClick} 
-                    question={text}
-                />
-			);
-		} else {
-			return (
-				<Controller3 
-                    backOnPress={backClick}  
-                    nextOnPress={nextClick} 
-                    question={text}
-                />
-			);
-		}
-}
-
-
-
     render() {
         const {
             video,
@@ -93,8 +73,6 @@ class VideoScreen extends Component {
             // subtitleStyle,
             videoStyle
         } = styles;
-
-        console.log('IM PLAYING');
 
         return (
             <View style={containerStyle}>
@@ -121,12 +99,18 @@ class VideoScreen extends Component {
                 </View>
                     
                 <View style={controllerStyle}>
-                    { this.renderController(backClick, nextClick, text) }
+                    <Controller3 
+                        backOnPress={backClick}  
+                        nextOnPress={nextClick} 
+                        question={text}
+                    />
                 </View>
             </View>
             );
         }
     }
+
+    const margin = moderateScale(14);
 
     const styles = {
         containerStyle: {
@@ -134,7 +118,10 @@ class VideoScreen extends Component {
             // marginTop: (Platform.OS === 'android') ? 25 : 0
         },
         controllerStyle: {
-            flex: 20
+            flex: 20,
+            marginBottom: margin,
+            marginRight: margin,
+            marginLeft: margin
         },
         overlayStyle: {
             position: 'absolute',
@@ -150,9 +137,9 @@ class VideoScreen extends Component {
         videoStyle: {
             flex: 80, 
             justifyContent: 'flex-end',
-            marginTop: 14,
-            marginRight: 14,
-            marginLeft: 14
+            marginTop: margin,
+            marginRight: margin,
+            marginLeft: margin
         }
     };
 

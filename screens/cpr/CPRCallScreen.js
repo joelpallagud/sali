@@ -25,7 +25,6 @@ class CPRCallScreen extends Component {
 	return (
 		<NumberListScreen 
 			question={call}
-			backClick={this.backClick}
 			nextClick={this.nextClick}
 		/>
 	);

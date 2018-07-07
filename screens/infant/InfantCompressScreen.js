@@ -28,13 +28,11 @@ class InfantCompressScreen extends Component {
         return (
             <VideoScreen 
                 text={(noBreath) ? CPRcompress : compress}
-                backClick={this.backClick}
                 nextClick={this.nextClick}
                 video={INFANT_COMPRESS_VID}
                 audio={INFANT_COMPRESS_AUDIO}
                 title="Compress the Chest"
                 hasBeat
-                noOptions
             />
         );
     }

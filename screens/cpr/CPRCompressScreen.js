@@ -26,7 +26,6 @@ class CompressScreen extends Component {
         return (
             <VideoScreen 
                 text={(noBreath) ? CPRcompress : compress}
-                backClick={this.backClick}
                 nextClick={this.nextClick}
                 video={COMPRESS_VID}
                 audio={COMPRESS_AUDIO}
