@@ -55,6 +55,13 @@ class SigninScreen extends Component {
 						icon={ICON_EMAIL}
 					    keyboardType='email-address'
 					    autoCapitalize='none'
+					    value = {this.state.email}
+					    onBlur={() => {
+						this.setState({
+						    emailError: validate('email', this.state.email)
+						});
+					    }}
+					    error={this.state.emailError}
 					/>
 			    </KeyboardAvoidingView>
 			    <KeyboardAvoidingView style={input}>
