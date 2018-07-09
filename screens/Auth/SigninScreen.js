@@ -23,6 +23,7 @@ class SigninScreen extends Component {
 		email: null,
 		password: null, 
 		error: '',
+		emailError: '',
     }
 
     submit= () => {
