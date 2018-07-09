@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, TouchableHighlight, Text } from 'react-native';
+import { Icon } from 'expo';
 import Fonts from '../constants/Fonts';
+import { ICON_CALL } from '../assets/icons';
 
 class NumberListItem extends Component {
     render() {
@@ -29,7 +31,10 @@ class NumberListItem extends Component {
                 <View style={buttonContainerStyle}>
                     <TouchableHighlight onPress={onPress} style={buttonStyle}>
                         <Text style={textStyle}>
-                            Call
+                        <Icon.Ionicons
+                            name={ICON_CALL}
+                            size={Fonts.icon}
+                        />
                         </Text>
                     </TouchableHighlight>
                 </View>

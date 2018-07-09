@@ -17,7 +17,7 @@ import validate, { confirmPassword } from '../../api/validate';
 import {
 	ICON_EMAIL,
 	ICON_PASSWORD
-} from '../../assets/images';
+} from '../../assets/icons';
 
 class SignupScreen extends Component {
     state = {
@@ -69,7 +69,7 @@ class SignupScreen extends Component {
 								    keyboardType='email-address'
 								    autoCapitalize='none'
 								    onChangeText={(email) => this.setState({ email })}
-								    src={ICON_EMAIL}
+								    icon={ICON_EMAIL}
 								    onBlur={() => {
 								    	this.setState({
 								    	  emailError: validate('email', this.state.email)
@@ -84,7 +84,7 @@ class SignupScreen extends Component {
 								    autoCapitalize='none'
 								    secureTextEntry   
 								    onChangeText={(password) => this.setState({ password })}
-								    src={ICON_PASSWORD}
+								    icon={ICON_PASSWORD}
 								    onBlur={() => {
 								    	this.setState({
 								    	  passwordError: validate('password', this.state.password)
@@ -99,7 +99,7 @@ class SignupScreen extends Component {
 								  autoCapitalize='none'
 								  secureTextEntry
 								  onChangeText={(confirmPassword) => this.setState({ confirmPassword })}
-								  src={ICON_PASSWORD}
+								  icon={ICON_PASSWORD}
 								  onBlur={() => {
 									this.setState({
 									   confirmPasswordError: confirmPassword(this.state.password, this.state.confirmPassword)

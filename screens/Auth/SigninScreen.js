@@ -6,7 +6,8 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import Background from '../../components/Background';
 import { deviceWidth, deviceHeight } from '../../api/dimensions';
-import { LOGO, ICON_EMAIL, ICON_PASSWORD } from '../../assets/images';
+import { LOGO } from '../../assets/images';
+import { ICON_EMAIL, ICON_PASSWORD } from '../../assets/icons';
 import { loginUser } from '../../actions';
 import validate from '../../api/validate';
 import validation from '../../api/validation';
@@ -51,7 +52,7 @@ class SigninScreen extends Component {
 					    style={input}
 					    placeholder='Email'
 						onChangeText={(email) => this.setState({ email })}
-						src={ICON_EMAIL}
+						icon={ICON_EMAIL}
 					    keyboardType='email-address'
 					    autoCapitalize='none'
 					/>
@@ -63,7 +64,7 @@ class SigninScreen extends Component {
 					    autoCapitalize='none'
 					    secureTextEntry
 						onChangeText={(password) => this.setState({ password })}
-						src={ICON_PASSWORD}
+						icon={ICON_PASSWORD}
 					/>
 			    </KeyboardAvoidingView>
 			    <View style={input}>

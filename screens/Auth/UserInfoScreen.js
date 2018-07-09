@@ -4,7 +4,8 @@ import Input from '../../components/Input';
 import { connect } from 'react-redux';
 import Button from '../../components/Button';
 import Background from '../../components/Background';
-import { LOGO, ICON_NAME, ICON_GIFT, ICON_NUMBER, ICON_LOCATION } from '../../assets/images';
+import { LOGO } from '../../assets/images';
+import { ICON_NAME, ICON_GIFT, ICON_NUMBER, ICON_LOCATION } from '../../assets/icons';
 import { userCreate } from '../../actions';
 import firebase from '../../api/firebase';
 import { deviceWidth } from '../../api/dimensions';
@@ -46,7 +47,7 @@ class UserInfoScreen extends Component {
 				style={styles.input}
 			    placeholder="Name"
 				onChangeText={(name) => this.setState({ name })}
-				src={ICON_NAME}
+				icon={ICON_NAME}
 			/>
 		    </View>
 		    <View style={styles.input}>
@@ -54,7 +55,7 @@ class UserInfoScreen extends Component {
 				style={styles.input}
 			    placeholder="Birthday"
 				onChangeText={(birthday) => this.setState({ birthday })}
-				src={ICON_GIFT}
+				icon={ICON_GIFT}
 			/>
 		    </View>
 		    <View style={styles.input}>
@@ -62,7 +63,7 @@ class UserInfoScreen extends Component {
 				style={styles.input}
 			    placeholder="Phone"
 				onChangeText={(phone) => this.setState({ phone })}
-				src={ICON_NUMBER}
+				icon={ICON_NUMBER}
 			/>
 		    </View>
 		    <View style={styles.input}>
@@ -70,7 +71,7 @@ class UserInfoScreen extends Component {
 				style={styles.input}
 			    placeholder="City"
 				onChangeText={(address) => this.setState({ address })}
-				src={ICON_LOCATION}
+				icon={ICON_LOCATION}
 			/>
 		    </View>
 		    <View style={styles.input}>

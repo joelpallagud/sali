@@ -115,7 +115,7 @@ class VideoScreen extends Component {
     const styles = {
         containerStyle: {
             flex: 1,
-            // marginTop: (Platform.OS === 'android') ? 25 : 0
+            backgroundColor: 'white'
         },
         controllerStyle: {
             flex: 20,

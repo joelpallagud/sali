@@ -1,11 +1,12 @@
 import React from 'react';
 import { TextInput, View, Image, Text } from 'react-native';
+import { Icon } from 'expo';
 import { moderateScale } from 'react-native-size-matters';
 import { deviceWidth, deviceHeight } from '../api/dimensions';
 import Fonts from '../constants/Fonts';
 
 
-const Input = ({ placeholder, value, onChangeText, secureTextEntry, autoCapitalize, keyboardType, src, error, onBlur}) => {
+const Input = ({ placeholder, value, onChangeText, secureTextEntry, autoCapitalize, keyboardType, icon, error, onBlur}) => {
     const { inputStyle, containerStyle, iconStyle, errorStyle, errorInputStyle } = styles;
     
     return (
@@ -24,9 +25,10 @@ const Input = ({ placeholder, value, onChangeText, secureTextEntry, autoCapitali
                     keyboardType={keyboardType}
                     onBlur={onBlur}
                 />
-                <Image
+                <Icon.Ionicons
+                    name={ icon }
+                    size={Fonts.icon}
                     style={iconStyle}
-                    source={src}
                 />
             </View>
             <Text>{error}</Text>
@@ -51,11 +53,8 @@ const styles = {
         alignItems: 'center'
     },
     iconStyle: {
-        position: 'absolute',
-		right: deviceWidth * 0.025,
-        marginRight: 0,
-        width: moderateScale(20),
-        height: moderateScale(20),
+        width: deviceHeight * 0.07,
+        textAlign: 'center',
     },
     containerStyle: {
         backgroundColor: 'white',

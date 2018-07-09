@@ -13,7 +13,7 @@ class LanguageScreen extends Component {
         const { text, auth, navigation } = this.props;
     
         if (text && auth.user) {
-            navigation.navigate('InfantSurvey')
+            navigation.navigate('UserCreate')
         }
     }
     englishHandleClick = () => {
@@ -79,10 +79,7 @@ const styles = {
 
 const mapStateToProps = (state) => {
     const { text, auth } = state;
-    console.log('state');
-    console.log(state);
-    // console.log(state);
-    // console.log(state);
+    
 
     return { text, auth };
 };

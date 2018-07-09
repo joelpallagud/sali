@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Alert, ActivityIndicator, KeyboardAvoidingView, ScrollView } from 'react-native';
+import { Icon } from 'expo';
 import DatePicker from 'react-native-datepicker';
 import Modal from 'react-native-modal';
 import { NavigationActions } from 'react-navigation';
@@ -15,7 +16,7 @@ import Logo from '../../components/Logo';
 import { deviceWidth, deviceHeight } from '../../api/dimensions';
 import { userCreate } from '../../actions';
 import validate from '../../api/validate';
-import { ICON_LOCATION, ICON_NUMBER, ICON_NAME, ICON_GIFT } from '../../assets/images';
+import { ICON_LOCATION, ICON_NUMBER, ICON_NAME, ICON_GIFT } from '../../assets/icons';
 import Fonts from '../../constants/Fonts';
 
 class UserCreateScreen extends Component {
@@ -99,7 +100,7 @@ class UserCreateScreen extends Component {
 								value={name}
 								placeholder='Name'
 								onChangeText={(name) => this.setState({ name })}
-								src={ICON_NAME}
+								icon={ICON_NAME}
 								onBlur={() => {
 									this.setState({
 										nameError: validate('name', this.state.name) 
@@ -111,7 +112,7 @@ class UserCreateScreen extends Component {
 						<View style={input}>
 							<View style={{ height: deviceHeight * 0.075, width: deviceWidth * 0.75 }}>
 								<DatePicker
-									style={(this.state.phoneError) ? errorDateContainerStyle : dateContainerStyle}
+									style={(this.state.birthdayError) ? errorDateContainerStyle : dateContainerStyle}
 									date={birthday}
 									mode='date'
 									format='MM/DD/YYYY'
@@ -121,13 +122,19 @@ class UserCreateScreen extends Component {
 									cancelBtnText='Cancel'
 									placeholder='Birthday'
 									androidMode='spinner'
-									iconSource={ICON_GIFT}
+									iconComponent={
+										<Icon.Ionicons
+                            				name={ICON_GIFT}
+											size={Fonts.icon}
+											style={{
+												position: 'absolute',
+												right: 0,
+												width: deviceHeight * 0.07,
+												textAlign: 'center',
+											}}
+										/>
+									}
 									customStyles={{
-										dateIcon: {
-											position: 'absolute',
-											right: deviceWidth * 0.025,
-											marginRight: 0
-										},
 										dateInput: {
 											paddingLeft: deviceWidth * 0.025,
 											borderWidth: 0,
@@ -155,7 +162,7 @@ class UserCreateScreen extends Component {
 								placeholder='Mobile number'
 								keyboardType='phone-pad'
 								onChangeText={(phone) => this.setState({ phone })}
-								src={ICON_NUMBER}
+								icon={ICON_NUMBER}
 								onBlur={() => {
 									this.setState({
 										phoneError: validate('phone', this.state.phone) 
@@ -169,7 +176,7 @@ class UserCreateScreen extends Component {
 								value={address}
 								placeholder='City'
 								onChangeText={(address) => this.setState({ address })}
-								src={ICON_LOCATION}
+								icon={ICON_LOCATION}
 								onBlur={() => {
 									this.setState({
 										addressError: validate('addressError', this.state.address) 
@@ -220,7 +227,7 @@ const styles = {
 	},
 	dateContainerStyle: {
 		backgroundColor: 'white',
-		height: deviceHeight * 0.06,
+		height: deviceHeight * 0.07,
 		borderWidth: 1,
 		borderRadius: 10,
 		width: '100%',
@@ -228,7 +235,7 @@ const styles = {
 	},
 	errorDateContainerStyle: {
 		backgroundColor: 'white',
-		height: deviceHeight * 0.06,
+		height: deviceHeight * 0.07,
 		borderWidth: 1,
 		borderRadius: 10,
 		width: '100%',
