@@ -10,18 +10,6 @@ import RootNavigation from './navigation/RootNavigation';
 import reducers from './reducers';
 import configureStore from './store';
 import {
-	ICON_CALL,
-	ICON_EMERGENCY,
-	ICON_FB,
-	ICON_GIFT,
-	ICON_LOCATION,
-	ICON_EMAIL,
-	ICON_NAME,
-	ICON_NUMBER,
-	ICON_NUMBER_ERROR,
-	ICON_PASSWORD,
-	ICON_PASSWORD_ERROR,
-	ICON_PROFILE,
 	CARD_CPR,
 	LOGO,
 	LOGO_NAME,
@@ -81,18 +69,6 @@ export default class App extends React.Component {
 				LOGO,
 				LOGO_NAME,
 				LOGO_WHITE,
-				ICON_CALL,
-				ICON_EMERGENCY,
-				ICON_FB,
-				ICON_GIFT,
-				ICON_LOCATION,
-				ICON_EMAIL,
-				ICON_NAME,
-				ICON_NUMBER,
-				ICON_NUMBER_ERROR,
-				ICON_PASSWORD,
-				ICON_PASSWORD_ERROR,
-				ICON_PROFILE,
 				CARD_CPR
       ]),
       Font.loadAsync({

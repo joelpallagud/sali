@@ -13,7 +13,7 @@ class LanguageScreen extends Component {
         const { text, auth, navigation } = this.props;
     
         if (text && auth.user) {
-            navigation.navigate('UserCreate')
+            navigation.navigate('Home')
         }
     }
     englishHandleClick = () => {
